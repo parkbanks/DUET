@@ -11,21 +11,32 @@
 
 int main()
 {
+    /* declare free parameters */
     int wlen = 1024;
     int timeStep = 512;
     int numFreq = 1024;
 
+    /* Testing FFT
     fftw_complex in[N], out[N];
     fftw_plan p;
+    */
 
     /* Load Audio File 1 */
     const std::string filePath = "res/examples_test-audio.wav";
     AudioFile<float> a;
     bool loadedOK = a.load (filePath);
     assert (loadedOK);
-        
-    std::vector<float> v1 = a.samples[0];
-    std::vector<float> v2 = hamming(wlen);
+    
+    /* load both audio tracks */
+    std::vector<float> x1 = a.samples[0];
+    std::vector<float> x2 = a.samples[1];
+
+    /* define hamming window */
+    std::vector<float> awin = hamming(wlen);
+
+    /* returns a 2d complex float array 1024 x 127
+    where 1024 is numFreq and 127 is ceil((numberSamples-length(awin)+1)/timeStep)+1
+    tf1 = tfanalysis(x1, awin, timeStep, numFreq); */
 
 
 
